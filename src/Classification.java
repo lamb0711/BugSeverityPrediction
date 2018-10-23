@@ -89,21 +89,21 @@ public class Classification {
 		
 		data.setClassIndex(data.numAttributes() - 1);
  
-		Instances[][] split = crossValidationSplit(data, 10);
+		Instances[][] split = crossValidationSplit(data, 10);//9개로 모델을 만들고 1나로 테스트 *10
 		Instances[] trainingSplits = split[0];
 		Instances[] testingSplits = split[1];
  
 		
 		FastVector predictions = new FastVector();
 
-		Classifier classifier = new NaiveBayes() ;
+		Classifier classifier = new NaiveBayes() ;//각각을 독립사전으로 모델링...
 		//Classifier classifier = new J48() ;
-		//Classifier classifier = new SMO() ;
+		//Classifier classifier = new SMO() ;//svo를 활용하는~
  
 		for (int i = 0; i < trainingSplits.length; i++) {
-			Evaluation validation = classify(classifier, trainingSplits[i], testingSplits[i]);
+			Evaluation validation = classify(classifier, trainingSplits[i], testingSplits[i]);//예측결과 저장 
  			predictions.appendElements(validation.predictions());
  		}
-		showPredictionResult(predictions) ;
+		showPredictionResult(predictions) ;//몇개 맞고 틀렸는지 요약해서 저장.
 	}
 }
